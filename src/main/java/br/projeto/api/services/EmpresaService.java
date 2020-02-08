@@ -20,5 +20,10 @@ public class EmpresaService {
 		return empresas;
 		
 	}
+	
+	public Empresa salvar(Empresa empresa) {
+	  Empresa emp = empRep.save(empresa);
+	  return emp;
+	}
 
 }
