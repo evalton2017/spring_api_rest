@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="empresa")
@@ -26,6 +27,7 @@ public class Empresa implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String razaoSocial;
+	@NotEmpty(message="CNPJ não pode ser vazio")
 	@Column(name="cnpj", unique = true, nullable = false)
 	private String cnpj;
 	@Column(name="data_criacao")

@@ -1,6 +1,6 @@
 package br.projeto.api;
 
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,16 +8,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import br.projeto.api.entities.Empresa;
-import br.projeto.api.repository.EmpresaRepository;
+import br.projeto.api.entities.Usuario;
+import br.projeto.api.repository.UsuarioRepository;
+import br.projeto.api.security.enums.PerfilEnum;
+import br.projeto.api.utils.SenhaUtils;
 
 
 @SpringBootApplication
 public class ApiSpringSwaggerApplication {
-
-	@Autowired
-	private EmpresaRepository empRepo;
 	
+	@Autowired
+	private UsuarioRepository userRep;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ApiSpringSwaggerApplication.class, args);
 	}
@@ -26,20 +28,14 @@ public class ApiSpringSwaggerApplication {
 	public CommandLineRunner commandLineRunner() {
 		return args -> {
 	
-		Empresa empresa = new Empresa();
-		empresa.setCnpj("0235566600010");
-		empresa.setDataAtualizacao(new Date());
-		empresa.setDataCriacao(new Date());
-		empresa.setRazaoSocial("Empresas Edivan");
-		
-		empRepo.save(empresa);
-		
-		Empresa duke =empRepo.findCnpj("002235550001");
-		duke.setRazaoSocial("Duke Corajoso");
-		empRepo.save(duke);
-		System.out.println(empRepo.findCnpj("002235550001"));
-			
-			
+			List<Usuario> user = userRep.findAll();	
+			if(user.isEmpty()) {
+				Usuario usuario = new Usuario();
+				usuario.setEmail("duke@gmail.com");
+				usuario.setPerfil(PerfilEnum.ROLE_USUARIO);
+				usuario.setSenha(SenhaUtils.gerarBcript("123456"));
+				userRep.save(usuario);
+			}
 		};
 	}
 
