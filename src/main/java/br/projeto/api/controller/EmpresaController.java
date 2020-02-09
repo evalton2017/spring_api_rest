@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +44,7 @@ public class EmpresaController {
 //	
 	
 	@RequestMapping(method=RequestMethod.GET)
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<List<Empresa>> empresas(){
 		List<Empresa> empresas = service.listar();
 		return ResponseEntity.ok().body(empresas);

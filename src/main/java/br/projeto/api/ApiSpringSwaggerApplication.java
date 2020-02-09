@@ -32,7 +32,7 @@ public class ApiSpringSwaggerApplication {
 			if(user.isEmpty()) {
 				Usuario usuario = new Usuario();
 				usuario.setEmail("duke@gmail.com");
-				usuario.setPerfil(PerfilEnum.ROLE_USUARIO);
+				usuario.setPerfil(PerfilEnum.ROLE_ADMIN);
 				usuario.setSenha(SenhaUtils.gerarBcript("123456"));
 				userRep.save(usuario);
 			}
