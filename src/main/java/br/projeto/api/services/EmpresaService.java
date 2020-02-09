@@ -25,5 +25,18 @@ public class EmpresaService {
 	  Empresa emp = empRep.save(empresa);
 	  return emp;
 	}
+	
+	public Empresa buscarCnpj(String cnpj) throws Exception {
+		
+		Empresa emp = empRep.findCnpj(cnpj);
+		if(emp==null) {
+			throw new Exception("Empresa não encontrado");
+		}
+		return emp;
+		
+		
+		
+
+	}
 
 }
