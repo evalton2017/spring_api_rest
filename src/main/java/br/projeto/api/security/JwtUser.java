@@ -21,8 +21,7 @@ public class JwtUser implements UserDetails{
 		this.password = password;
 		this.authorities = authorities;
 	}
-	
-	
+		
 
 	public Long getId() {
 		return id;
