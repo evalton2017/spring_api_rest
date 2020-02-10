@@ -30,7 +30,7 @@ public class JwtTokenUtil {
 		String username;
 		try {
 			Claims claims = getClaimsFromToken(token);
-			username = claims.getSubject();
+			username = (String) claims.get("sbu");
 		}catch(Exception e) {
 			username= null;
 		}
